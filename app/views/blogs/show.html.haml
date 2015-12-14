@@ -1,0 +1,29 @@
+%h1= @blog.title
+
+= fa_icon 'pencil-square-o'
+= link_to 'Edit', edit_blog_path(@blog)
+\|
+= fa_icon 'backward'
+= link_to 'Back', blogs_path
+
+
+%h2 Entries
+
+%table(class="table")
+  %thead
+    %tr
+      %th Title
+      %th Body
+      %th Control
+
+  %tbody
+    - @blog.entries.all.each do |entry|
+      %tr
+        %td= entry.title
+        %td= entry.body
+        %td
+          = link_to 'Show', blog_entry_path(@blog, entry), class: 'btn btn-info'
+          = link_to 'Edit', edit_blog_entry_path(@blog, entry), class: 'btn btn-primary'
+          = link_to 'Destroy', blog_entry_path(@blog, entry), method: :delete, data: {confirm: '削除してよろしいですか?'}, class: 'btn btn-danger'
+
+= link_to 'New Entry', new_blog_entry_path(@blog), { class: 'btn btn-primary' }

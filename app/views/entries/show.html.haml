@@ -1,0 +1,39 @@
+%h1= @entry.blog.title
+
+%div(class='page-header')
+  %h2= @entry.title
+
+%div(class='panel panel-default')
+  %div(class='panel-body')
+    = @entry.body
+
+%h2 Comments
+
+%table(class='table')
+  %tbody
+    - @entry.comments.all.each do |comment|
+      %tr
+        - if comment.approved?
+          %td= comment.body
+          %td
+        - else
+          %td  (承認待ち)
+          %td
+            = link_to 'Approve', entry_comment_approve_path(@entry, comment), method: :patch,
+            class: 'btn btn-primary'
+        %td
+          = link_to 'Destroy', entry_comment_path(@entry, comment), method: :delete,
+          class: 'btn btn-danger', data: {confirm: '削除してよろしいですか?'}
+
+
+%h3 New Comment
+
+= form_for([@entry, @entry.comments.new], html: {class: 'form'}) do |f|
+  %div(class='row')
+    %div(class='col-sm-4')
+      %div(class='form-group')
+        = f.text_area :body, class: 'form-control'
+
+      %div(class='form-group')
+        = f.button 'Submit', class: 'btn btn-primary'
+

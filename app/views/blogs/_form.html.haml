@@ -1,0 +1,10 @@
+= form_for(blog) do |f|
+  = render 'shared/error_messages', model: blog
+
+  %div(class='col-sm-6')
+    %div(class='form-group')
+      = f.label :title
+      = f.text_field :title, class: 'form-control'
+  
+    %div(class='form-group')
+      = f.button 'Submit', class: 'btn btn-primary'
