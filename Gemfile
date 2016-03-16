@@ -19,6 +19,10 @@ gem 'font-awesome-rails', '~> 4.5.0'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem "capybara", "~> 2.6.0"
+  gem "database_cleaner", "~> 1.0.1"
+  gem "launchy", "~> 2.3.0"
 end
 
 group :development do
